@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 
 const appSettings = {
     databaseURL: "https://realtime-database-8a603-default-rtdb.firebaseio.com/"
@@ -19,6 +19,11 @@ addBtnEl.addEventListener("click", function() {
     push(shoppingListInDB, inputValue)
     appendLi(inputValue)
     clearInputField()
+})
+
+onValue(shoppingListInDB, function(snapshot) {
+    let arrayValues = Object.values(snapshot.val())
+    console.log(arrayValues )
 })
 
 function clearInputField () {
